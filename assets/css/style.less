@@ -9,103 +9,144 @@ html {
 		// width:1000px;
 		height:100%;
 		font-family:arial,serif;
-		// margin:auto;
 
-		#slider {
-			width:960px;
-			height:350px;
-			position:relative;
-			> #controlsWrapper {
-				> .control {
-					width:15%;
-					height:100%;
-					top:0;
-					position:absolute;
-					opacity:.3;
-					> a {
-						display:block;position:absolute;
-						background:olive;
-						background: url('../img/sprite-arrow.png') top left no-repeat;
-						width:35px;
-						height:35px;
-						top:50%;
-						left:50%;
-						zoom: 1;
-						margin:-10% 0 0 -10%;
+		#slider-wrapper {
+			margin:auto;
+			background:url('../img/bg-main.png') center top no-repeat;
+			width:970px;
+			height:400px;
+			padding:21px 0;
+			#slider {
+				margin:0 auto;
+				position:relative;
+				width:940px;
+				height:330px;
+				> #controlsWrapper {
+					> .control {
+						width:5%;
+						height:100%;
+						top:0;
+						position:absolute;
+						opacity:.3;
+						> a {
+							display:block;position:absolute;
+							background:olive;
+							background: url('../img/sprite-arrow.png') top left no-repeat;
+							width:35px;
+							height:35px;
+							top:50%;
+							left:20%;
+							zoom: 1;
+							margin:-10% 0 0 -10%;
+						}
+					}
+					> .left {
+						left:0;
+						> a {
+							left:auto;
+							right:20%;
+							margin:-10% -10% 0 0;
+							background-position:0px -34px;
+						}
+					}
+					> .right {
+						right:0;
 					}
 				}
-				> .left {
-					left:0;
-					> a {
-						left:auto;
-						right:50%;
-						margin:-10% -10% 0 0;
-						background-position:0px -34px;
-					}
-				}
-				> .right {
-					right:0;
-				}
-			}
-			> #slidesWrapper {
-				width:100%;
-				height:100%;
-				overflow:hidden;
-				> li {
-					background:@black;
+				> #slidesWrapper {
 					width:100%;
 					height:100%;
-					position: absolute;
-					top:0;
-					left:0;
-					-moz-opacity:1;
-					-khtml-opacity:1;
-					-ms-filter:"alpha(opacity=1)";
-					filter: progid:DXImageTransform.Microsoft.Alpha(opacity=1);
-					filter:alpha(opacity=1);
-					opacity:1;
-					zoom: 1;
-					> img {
+					overflow:hidden;
+					> li {
+						background:@black;
+						width:100%;
 						height:100%;
-						position:relative;
+						position: absolute;
+						top:0;
 						left:0;
-					}
-					> div {
-						overflow:auto;
-						-moz-opacity:0;
-						-khtml-opacity:0;
-						-ms-filter:"alpha(opacity=0)";
-						filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-						filter:alpha(opacity=0);
-						opacity:0;
-						position:absolute;
-						top:25%;
-						left:12.5%;
-						width:70%;
-						height:140px;
-						padding:10px 20px;
-						border:solid 1px @black;
-						background:fade(@white,60%);
-						-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out; -ms-transition: all .5s ease-in-out; -o-transition: all .5s ease-in-out; transition: all .5s ease-in-out;
-						> h4 {
-							font-family:'Oswald',arial,serif;
-							font-size:25px;
-							margin:auto auto 10px auto;
+						-moz-opacity:1;
+						-khtml-opacity:1;
+						-ms-filter:"alpha(opacity=1)";
+						filter: progid:DXImageTransform.Microsoft.Alpha(opacity=1);
+						filter:alpha(opacity=1);
+						opacity:1;
+						zoom: 1;
+						> img {
+							height:100%;
+							position:relative;
+							left:0;
 						}
-						> p {
-							font-size:13px;
+						> div {
+							overflow:auto;
+							-moz-opacity:0;
+							-khtml-opacity:0;
+							-ms-filter:"alpha(opacity=0)";
+							filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+							filter:alpha(opacity=0);
+							opacity:0;
+							position:absolute;
+							top:25%;
+							left:12.5%;
+							width:70%;
+							height:140px;
+							padding:10px 20px;
+							border:solid 1px @black;
+							background:fade(@white,60%);
+							-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out; -ms-transition: all .5s ease-in-out; -o-transition: all .5s ease-in-out; transition: all .5s ease-in-out;
+							> h4 {
+								font-family:'Oswald',arial,serif;
+								font-size:25px;
+								margin:auto auto 10px auto;
+							}
+							> p {
+								font-size:13px;
+							}
+						}
+					}
+				}
+				> .slideFeedback {
+					position:absolute;
+					width:100%;
+					height:15px;
+					text-align:center;
+					bottom:8px;
+					> li {
+						width:14px;
+						height:26px;
+						display:inline-block;
+						background: url('../img/bg-feedback.png') center top no-repeat;
+						> a {
+							display:inline-block;
+							background: url('../img/feedback-circle.png') center center no-repeat;
+							width:14px;
+							height:26px;
+						}
+					}
+					> li.first {
+						width:22px;
+						text-align:right;
+						background-position:left top;
+					}
+					> li.last {
+						width:22px;
+						text-align:left;
+						background-position:right top;
+					}
+					> li.active {
+						> a {
+							background: url('../img/feedback-circle-active.png') center center no-repeat;
 						}
 					}
 				}
 			}
-		}
-		#slider:hover > #slidesWrapper > li > div {
-			-moz-opacity:1;
-			-khtml-opacity:1;
-			-ms-filter:"alpha(opacity=1)";
-			filter: progid:DXImageTransform.Microsoft.Alpha(opacity=1);
-			filter:alpha(opacity=1);
-			opacity:1;
+			#slider:hover > #slidesWrapper > li > div {
+				-moz-opacity:1;
+				-khtml-opacity:1;
+				-ms-filter:"alpha(opacity=1)";
+				filter: progid:DXImageTransform.Microsoft.Alpha(opacity=1);
+				filter:alpha(opacity=1);
+				opacity:1;
+			}
 		}
 
 		@media screen and (max-width:960px) {

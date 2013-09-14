@@ -7,43 +7,59 @@
                 var slides = self.find('#slidesWrapper > li'),
                     slidesNb = slides.length,
                     hovering = false,
+                    slideFeedback,
 
-                    showSlide = function(index){
+                    getCurrentIndex = function(){
+                        return slides.filter('.active').index();
+                    }
+
+                    updateSlide = function(index){
                         index = (index < 0)?slidesNb -1:index;
                         index = (index > slidesNb -1)?0:index;
 
-
-                        slides.filter('.active').removeClass('active').fadeOut(500);
-                        $(slides.get(index)).addClass('active').fadeIn(300);
+                        slideFeedback.children().removeClass('active').eq(index).addClass('active');
+                        slides.filter('.active').removeClass('active').fadeOut(700);
+                        $(slides.eq(index)).addClass('active').fadeIn(500);
                         ;
                     },
 
                     setup = function(){
+                        slideFeedback = $('<ul>').addClass('slideFeedback');
+                        
+                        for (var i = slidesNb - 1; i >= 0; i--){
+                            slideFeedback.prepend($('<li>').addClass((i == 0)?'active first':(slidesNb -1 == i)?'last':'')
+                                .append($('<a>').attr({href: '#'})
+                                    .on('click',(function(e){
+                                        e.preventDefault();
+                                        var index = $(this).parent().index();
+                                        if(getCurrentIndex() !== index){
+                                            updateSlide(index);
+                                        }
+                                    }))));
+                        };
+
                         self.on({
 
                             mouseenter: function() {hovering = true;},
                             mouseleave: function() {hovering = false;}
 
-                        }).find('#controlsWrapper > .control').on('click',function(e){
+                        })
+                        .append(slideFeedback)
+                        .find('#controlsWrapper > .control').on('click',function(e){
                             e.preventDefault();
                             theControl = $(this);
-                            index = slides.filter('.active').index();
+                            index = getCurrentIndex();
 
                             if(e.target.tagName == 'A'){
-                                showSlide(theControl.hasClass('right')?index+1:index-1);
+                                updateSlide(theControl.hasClass('right')?index+1:index-1);
                             }
                         });
-                    },
-
-                    updateSlide = function(index){
-                        index = (index < 0)?0:index;
-                        index = (index < 0)?0:index;
                     },
 
                     timer = function(delay){
                         setTimeout(function(){
                             if(!hovering){
-                                showSlide(slides.filter('.active').index() + 1);
+                                updateSlide(getCurrentIndex() + 1);
                             };
                             timer(delay);
                         },delay);
@@ -61,6 +77,11 @@
         }
     });
 })(jQuery);
+
+
+
+
+
 
 
 
